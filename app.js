@@ -1,11 +1,12 @@
+var http = require('http');
 var express = require('express');
+var app = express();
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 var router = express.Router();
 var path = require('path');
 
 var indexRouter = require('./routes/index');
-//
-
-var app = express();
 
 //Views
 app.set('views', path.join(__dirname, 'views'));
@@ -29,6 +30,51 @@ module.exports = app, router;
 /*************************************** START **************************************************** */
 
 //Server
-const server = app.listen(3000, () => {
-  console.log(`Express running → PORT ${server.address().port}`);
+server.listen(3000, () => {
+    console.log(`Express running → PORT ${server.address().port}`);
 });
+
+/*************************************** IO **************************************************** */
+
+var numUsers = 0;
+
+io.on('connection', function(socket)
+{
+    numUsers++;
+    console.log(numUsers + " are now connected!");
+    var addedUser = false;
+
+    socket.on('chat message', function(msg)
+    {
+      io.emit('chat message', msg);
+    })
+
+    socket.on('set username', function(username)
+    {
+      console.log("New user named " + username); 
+      addedUser = true;
+      socket.username = username;
+    })
+
+    socket.on('video time', function(data)
+    {
+      io.emit('video time', data);
+    })
+
+    socket.on('pause', function(username)
+    {
+      io.emit('chat message', username + " has paused the video");
+      io.emit('pause');
+    })
+
+    socket.on('disconnect', () =>
+    {
+      if(addedUser)
+      {
+        numUsers--;
+        var message = socket.username + " disconnected. " + numUsers + " left in the server";
+        console.log(message);
+        io.emit('disconnected', message);
+      }
+    })
+})
