@@ -2,10 +2,29 @@ html
 
   head
 
-    title Watch2Gather
+    title Sync
     link(rel='stylesheet', href='/styles/style.css')
     script(src="scripts/jquery.js")
+    script(src="/socket.io/socket.io.js")
+    script(src="https://www.youtube.com/iframe_api")
+    script(src="scripts/index.js")
     link(rel="shortcut icon", type="image/png", href="/images/favicon.png")
-  body#index
-    div#startingPage
-      h1 Sync
+  body
+    div.chat
+      ul#messages
+      form#messageForm
+        input#m.form-control(type='text', placeholder='Send a message...')
+        button Send
+    form#chooseVideo
+      input#videoURL.form-control(type='text', placeholder="Paste your youtube url video here")
+      button Stream
+    div#ytplayer
+    div#controls
+      div.slidercontainer#videoSliderDiv
+        input#videoSlider.form-control(type='range' min='0' max='60' value='0' step='0.01' class="slider")
+      p#sliderP 0
+      button Play/Pause
+      div.slidercontainer#volumeSliderDiv
+        input#volumeSlider.form-control(type='range' min='0' max='100' value='20' step='1' class="slider")
+      p#volumeP 0
+    p#duration
