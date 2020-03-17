@@ -43,28 +43,27 @@ io.on('connection', function(socket)
     numUsers++;
     console.log(numUsers + " are now connected!");
     var addedUser = false;
+    var roomID = "";
 
     socket.on('chat message', function(msg)
     {
-      io.emit('chat message', msg);
+      io.to(roomID).emit('chat message', msg);
     })
 
-    socket.on('set username', function(username)
+    socket.on('setup', function(data)
     {
-      console.log("New user named " + username); 
+      console.log("New user named " + data["username"] + " on room " + data["id"]);
+
+      socket.join(data["id"]);
+      socket.username = data["username"];
+      roomID = data["id"];
+
       addedUser = true;
-      socket.username = username;
     })
 
     socket.on('video time', function(data)
     {
-      io.emit('video time', data);
-    })
-
-    socket.on('pause', function(username)
-    {
-      io.emit('chat message', username + " has paused the video");
-      io.emit('pause');
+      io.to(roomID).emit('video time', data);
     })
 
     socket.on('disconnect', () =>
@@ -74,7 +73,15 @@ io.on('connection', function(socket)
         numUsers--;
         var message = socket.username + " disconnected. " + numUsers + " left in the server";
         console.log(message);
-        io.emit('disconnected', message);
+        io.to(roomID).emit('disconnected', message);
+      }
+    })
+
+    socket.on('video URL', function(videoID)
+    {
+      io.to(roomID).emit('video URL', videoID);
+    })
+
     socket.on('state', function(data)
     {
       switch(data["state"])
