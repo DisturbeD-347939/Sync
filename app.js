@@ -75,6 +75,32 @@ io.on('connection', function(socket)
         var message = socket.username + " disconnected. " + numUsers + " left in the server";
         console.log(message);
         io.emit('disconnected', message);
+    socket.on('state', function(data)
+    {
+      switch(data["state"])
+      {
+        case -1:
+          console.log("Unstarted");
+          io.to(roomID).emit('chat message', data["username"] + " is about to start the video");
+          io.to(roomID).emit('unstarted');
+          break;
+        case 0:
+          console.log("Ended");
+          io.to(roomID).emit('chat message', data["username"] + " has finished the video");
+          io.to(roomID).emit('end')
+          break;
+        case 1:
+          console.log("Playing");
+          io.to(roomID).emit('chat message', data["username"] + " has played the video");
+          io.to(roomID).emit('play');
+          break;
+        case 2:
+          console.log("Paused");
+          io.to(roomID).emit('chat message', data["username"] + " has paused the video");
+          io.to(roomID).emit('pause');
+          break;
+          
       }
     })
+
 })
