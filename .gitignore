@@ -3,3 +3,4 @@ package.json
 package-lock.json
 /public/styles/style.css.map
 /public/styles/style.scss
+ServiceAccountKey.json
