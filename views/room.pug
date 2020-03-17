@@ -1,0 +1,38 @@
+html
+
+  head
+
+    title= id
+    link(rel='stylesheet', href='/styles/style.css')
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+    link(type="text/css", rel="stylesheet", href="../styles/materialize.min.css", media="screen,projection")
+    script(type="text/javascript", src="../scripts/materialize.min.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+    script(src="/socket.io/socket.io.js")
+    script(src="https://www.youtube.com/iframe_api")
+    script.
+      var id = '!{id}' 
+    script(src="../scripts/room.js")
+    link(rel="shortcut icon", type="image/png", href="/images/favicon.png")
+  body
+    p#id USERNAME
+    div.chat
+      ul#messages
+    form#messageForm
+      input#m.form-control(type='text', placeholder='Send a message...')
+      a#sendMessage.waves-effect.waves-light.btn.red Send
+    form#chooseVideo
+      input#videoURL.form-control(type='text', placeholder="Paste your youtube url video here")
+      a#sendVideo.waves-effect.waves-light.btn.red Stream
+    div#ytplayer
+    div#controls
+      form(action="#")
+        p.range-field
+          input#videoSlider.test5(type="range", min="0", max="60", value="0", step="1")
+      p#sliderP 0
+      button#play Play/Pause
+      form(action="#")
+        p.range-field
+          input#volumeSlider.test5(type="range", min="0", max="100", value="5", step="1")
+      p#volumeP 0
+    p#duration
