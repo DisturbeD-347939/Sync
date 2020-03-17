@@ -24,6 +24,7 @@
   "homepage": "https://github.com/DisturbeD-347939/Sync#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "firebase-admin": "^8.10.0",
     "http": "0.0.0",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0"
