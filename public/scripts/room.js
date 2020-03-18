@@ -2,6 +2,7 @@ var player;
 var username = prompt("What is your username?");
 var date = new Date();
 
+
 if(username)
 {
     $(function()
@@ -17,6 +18,7 @@ if(username)
         socket.on('chat message', function(msg)
         {
             $('#messages').append($('<li>').text(msg));
+            $("#chat").scrollTop($('#chat').prop('scrollHeight'));
         });
 
         socket.on('disconnected', function(msg)
