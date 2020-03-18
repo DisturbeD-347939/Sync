@@ -5,6 +5,15 @@ var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 var router = express.Router();
 var path = require('path');
+var admin = require('firebase-admin');
+var serviceAccount = require('./ServiceAccountKey.json');
+
+admin.initializeApp(
+{
+  credential: admin.credential.cert(serviceAccount)
+});
+
+const db = admin.firestore();
 
 var indexRouter = require('./routes/index');
 
