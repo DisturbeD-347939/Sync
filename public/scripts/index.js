@@ -7,4 +7,13 @@ $(document).ready(function()
         console.log(url);
         window.location.href = url;
     })
+
+    function update()
+    {
+        console.log($('#indexContent').height());
+        $('#indexContent').height(($('#indexBody').height()*60)/100);
+    }
+
+    setTimeout(update(), 0);
+    setInterval(update(), 2000);
 })
