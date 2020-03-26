@@ -18,7 +18,7 @@ if(username)
         socket.on('chat message', function(msg)
         {
             $('#messages').append($('<li>').text(msg));
-            $("#chat").scrollTop($('#chat').prop('scrollHeight'));
+            $("#chatWindow").scrollTop($('#chatWindow').prop('scrollHeight'));
         });
 
         socket.on('disconnected', function(msg)
