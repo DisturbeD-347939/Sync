@@ -48,6 +48,21 @@ $(document).ready(function()
         $('.input-field > span').text('');
         M.updateTextFields();
     })
+
+    $('#indexRegister').submit(function(e)
+    {
+        e.preventDefault();
+        console.log("Registering...");
+        if($('#username').hasClass("valid") && $('#password').hasClass("valid") && $('#email').hasClass("valid"))
+        {
+            socket.emit('register', {username: $('#username').val(), email: $('#email').val(), password: $('#password').val()});
+            console.log("All valid");
+        }
+        else
+        {
+            console.log("Some not valid");
+        }
+    })
     function update()
     {
         console.log($('#indexContent').height());
