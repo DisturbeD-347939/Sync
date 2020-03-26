@@ -1,14 +1,51 @@
 html
     head
         title Sync - Homepage
-        link(rel='stylesheet', href="styles/index.css")
+        link(rel='stylesheet', href="styles/style.css")
         link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
         link(type="text/css", rel="stylesheet", href="styles/materialize.css", media="screen,projection")
         script(type="text/javascript", src="scripts/materialize.js")
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+        script(src="/socket.io/socket.io.js")
         script(src="scripts/index.js")
-    body
-        a#createRoom.waves-effect.waves-light.btn.red Create room
-        form(action="#")
-            p.range-field
-                input.test5(type="range", min="0", max="100")
+    body#indexBody
+        div#indexContent
+            div#indexTitleDiv
+                h1#indexTitle Sync
+                hr
+            div#indexButtons
+                p#indexFeedback
+                div#createRoom.waves-effect.waves-light.btn.grey Create room
+                div#login.waves-effect.waves-light.btn.grey Login
+                div#register.waves-effect.waves-light.btn.grey Register
+            div#indexRegister
+                div.input-field.inline
+                    input.validate(id="email" type="email")
+                    label(for="email") Email
+                    span#emailFeedback.helper-text(data-error="Wrong email type" data-success="Ok")
+                div.input-field.inline
+                    input.validate(id="username" type="text")
+                    label(for="username") Username
+                    span.helper-text(data-error="Wrong username type" data-success="Ok")
+                div.input-field.inline
+                    input.validate(id="password" type="password")
+                    label(for="password") Password
+                    span.helper-text(data-error="Wrong password type" data-success="Ok")
+                div#submitRegister.waves-effect.waves-light.btn.grey Register
+                div.back.waves-effect.waves-light.btn.grey Back
+            div#indexLogin
+                div.input-field.inline
+                    input.validate(id="emailLogin" type="email")
+                    label(for="email") Email
+                    span.helper-text(data-error="Wrong email type" data-success="Ok")
+                div.input-field.inline
+                    input.validate(id="passwordLogin" type="password")
+                    label(for="password") Password
+                    span.helper-text(data-error="Wrong password type")
+                div#submitLogin.waves-effect.waves-light.btn.grey Login
+                div.back.waves-effect.waves-light.btn.grey Back
+            div#indexLoggedIn
+                p#welcomeMessage
+                div#createRoom.waves-effect.waves-light.btn.grey Create room
+                div#login.waves-effect.waves-light.btn.grey Login
+                div#register.waves-effect.waves-light.btn.grey Register
