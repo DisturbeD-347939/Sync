@@ -1,5 +1,10 @@
 $(document).ready(function()
 {
+    var socket = io();
+
+    $('#indexRegister').hide();
+    $('#indexLogin').hide();
+
     $('#createRoom').click(function()
     {
         generateString = Math.random().toString(36).substr(2, 9);
