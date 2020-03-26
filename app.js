@@ -6,6 +6,7 @@ var io = require('socket.io').listen(server);
 var router = express.Router();
 var path = require('path');
 var admin = require('firebase-admin');
+var bcrypt = require('bcryptjs')
 var serviceAccount = require('./ServiceAccountKey.json');
 
 admin.initializeApp(
@@ -45,8 +46,10 @@ server.listen(5000, () => {
 
 /*************************************** IO **************************************************** */
 
+//Counts the number of active users on the website
 var numUsers = 0;
 
+//Function called when a new member joins
 io.on('connection', function(socket)
 {
     numUsers++;
@@ -119,4 +122,97 @@ io.on('connection', function(socket)
       }
     })
 
+    socket.on('register', function(data)
+    {
+      socket.leaveAll();
+      socket.join(data["email"]);
+      var emailAvailable = true;
+      var counter = 0;
+      db.collection('Users').get()
+      .then(snapshot => 
+      {
+        snapshot.forEach(doc => 
+        {
+          if(doc.id == data["email"])
+          {
+            console.log("Same email");
+            emailAvailable = false;
+          }
+          counter++;
+
+          if(counter == snapshot["_size"])
+          {
+            bcrypt.genSalt(10, function(err, salt)
+            {
+              bcrypt.hash(data["password"], salt, function(err, hash) 
+              {
+                var fields = 
+                {
+                  username: data["username"],
+                  password: hash
+                }
+                if(emailAvailable)
+                {
+                  db.collection('Users').doc(data["email"]).set(fields).then(() =>
+                  {
+                    io.to(data["email"]).emit('register', true);
+                    console.log("Account created");
+                    socket.leaveAll();
+                  })
+                }
+                else
+                {
+                  io.to(data["email"]).emit('register', false);
+                  console.log("Email in use");
+                  socket.leaveAll();
+                }
+              });
+            });
+          }
+        })
+      })
+      .catch(err => 
+      {
+        console.log('Error getting documents', err);
+        io.to(data["email"].emit('register', "error"))
+      });
+      
+    })
+
+    socket.on('login', function(data)
+    {
+      console.log(data);
+      socket.leaveAll();
+      socket.join(data["email"]);
+      db.collection('Users').doc(data["email"]).get()
+      .then(function(doc) 
+      {
+        if (doc.exists) 
+        {
+          bcrypt.compare(data["password"], doc.data()["password"], function(err, res) 
+          {
+            if(res == true)
+            {
+              console.log("Logged in");
+              io.to(data["email"]).emit('login', true);
+            }
+            else
+            {
+              console.log("Wrong email/password");
+              io.to(data["email"].emit('login', false))
+            }
+          });
+        } 
+        else 
+        {
+            console.log("No such document!");
+            io.to(data["email"].emit('login', "error"))
+        }
+      })
+    })
+
 })
+
+/*
+
+          */
