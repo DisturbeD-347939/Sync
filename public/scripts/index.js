@@ -34,6 +34,20 @@ $(document).ready(function()
     {
         $('#indexLogin').submit();
     })
+
+    $('.back').click(function()
+    {
+        $('#indexButtons').show();
+        $('#indexRegister').hide();
+        $('#indexLogin').hide();
+
+        $('.input-field > input').val("");
+        $('.input-field > input').removeClass("valid");
+        $('.input-field > input').removeClass("invalid");
+        $('.input-field > label').removeClass("active");
+        $('.input-field > span').text('');
+        M.updateTextFields();
+    })
     function update()
     {
         console.log($('#indexContent').height());
