@@ -63,6 +63,22 @@ $(document).ready(function()
             console.log("Some not valid");
         }
     })
+
+    $('#indexLogin').submit(function(e)
+    {
+        e.preventDefault();
+        
+        if($('#emailLogin').hasClass("valid") && $('#passwordLogin').hasClass("valid"))
+        {
+            socket.emit('login', {email: $('#emailLogin').val(), password: $('#passwordLogin').val()});
+            console.log("All valid");
+        }
+        else
+        {
+            console.log("Some not valid");
+        }
+        
+    })
     function update()
     {
         console.log($('#indexContent').height());
