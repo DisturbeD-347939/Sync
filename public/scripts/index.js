@@ -108,7 +108,7 @@ $(document).ready(function()
     function update()
     {
         console.log($('#indexContent').height());
-        $('#indexContent').height(($('#indexBody').height()*60)/100);
+        $('#indexContent').height(($('#indexBody').height()*70)/100);
     }
 
     setTimeout(update(), 0);
