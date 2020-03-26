@@ -79,6 +79,32 @@ $(document).ready(function()
         }
         
     })
+    
+    socket.on('register', function(data)
+    {
+        console.log("Registering was " + data);
+        if(data)
+        {
+            $('#indexFeedback').text("Account created!");
+            $('#indexFeedback').css('color', "green");
+            $('.back').click();
+        }
+        else
+        {
+            $('.input-field:first-child > input').val("");
+            $('.input-field:first-child > input').removeClass("valid");
+            $('.input-field:first-child > input').addClass("invalid");
+            $('#emailFeedback').attr("data-error", "Email already in use! Try again.");
+            M.updateTextFields();
+
+            setTimeout(function()
+            {
+                $('.input-field:first-child > label').removeClass("active");
+                $('.input-field:first-child > input').removeClass("invalid");
+                $('#emailFeedback').attr("data-error", "Wrong email type");
+            }, 2500);
+        }
+    })
     function update()
     {
         console.log($('#indexContent').height());
