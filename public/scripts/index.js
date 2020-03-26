@@ -25,6 +25,15 @@ $(document).ready(function()
         $('#indexLogin').show();
     })
 
+    $('#submitRegister').click(function()
+    {
+        $('#indexRegister').submit();
+    })
+
+    $('#submitLogin').click(function()
+    {
+        $('#indexLogin').submit();
+    })
     function update()
     {
         console.log($('#indexContent').height());
