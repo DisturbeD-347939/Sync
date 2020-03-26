@@ -15,26 +15,25 @@ html
     script(src="../scripts/room.js")
     link(rel="shortcut icon", type="image/png", href="/images/favicon.png")
   body
-    p#id USERNAME
-    div#screen_chat
-      div#screen
-        div#ytplayer
-        div#controls
-          form(action="#")
-            p.range-field
-              input#videoSlider.test5(type="range", min="0", max="60", value="0", step="1")
-          p#sliderP 0
-          button#play Play/Pause
-          form(action="#")
-            p.range-field
-              input#volumeSlider.test5(type="range", min="0", max="100", value="5", step="1")
-          p#volumeP 0
+    div#content
+      div#ytplayer
+      div#controls
+        button#play Play/Pause
+        form(action="#")
+          p.range-field
+            input#videoSlider.test5(type="range", min="0", max="60", value="0", step="1")
+        p#sliderP 0
+        form(action="#")
+          p.range-field
+            input#volumeSlider.test5(type="range", min="0", max="100", value="5", step="1")
+        p#volumeP 0
         p#duration
       div#chat
-        ul#messages
-      form#messageForm
-        input#m.form-control(type='text', placeholder='Send a message...')
-        a#sendMessage.waves-effect.waves-light.btn.red Send
+        div#chatWindow
+          ul#messages
+        form#messageForm
+          input#m.form-control(type='text', placeholder='Send a message...')
+          a#sendMessage.waves-effect.waves-light.btn.red Send
       form#chooseVideo
-        input#videoURL.form-control(type='text', placeholder="Paste your youtube url video here")
-        a#sendVideo.waves-effect.waves-light.btn.red Stream
+          input#videoURL.form-control(type='text', placeholder="Paste your youtube url video here")
+          a#sendVideo.waves-effect.waves-light.btn.red Stream
