@@ -13,6 +13,18 @@ $(document).ready(function()
         window.location.href = url;
     })
 
+    $('#register').click(function()
+    {
+        $('#indexButtons').hide();
+        $('#indexRegister').show();
+    })
+
+    $('#login').click(function()
+    {
+        $('#indexButtons').hide();
+        $('#indexLogin').show();
+    })
+
     function update()
     {
         console.log($('#indexContent').height());
