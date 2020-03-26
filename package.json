@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/DisturbeD-347939/Sync#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "firebase-admin": "^8.10.0",
     "http": "0.0.0",
