@@ -4,6 +4,7 @@ $(document).ready(function()
 
     $('#indexRegister').hide();
     $('#indexLogin').hide();
+    $('#indexLoggedIn').hide();
 
     $('.createRoom').click(function()
     {
