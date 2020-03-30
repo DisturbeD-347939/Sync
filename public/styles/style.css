@@ -93,9 +93,9 @@
   align-items: center; }
   #indexButtons div {
     width: 100%; }
-  #indexButtons div:first-child {
+  #indexButtons .createRoom {
     margin-bottom: 10px; }
-  #indexButtons div:last-child {
+  #indexButtons #register {
     margin-top: 10px; }
 
 #indexContent {
@@ -121,5 +121,17 @@
   align-items: center; }
   #indexLogin div:last-child {
     margin-top: 15px; }
+
+#indexLoggedIn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center; }
+  #indexLoggedIn div {
+    width: 100%; }
+  #indexLoggedIn div:first-child {
+    margin-bottom: 10px; }
+  #indexLoggedIn div:last-child {
+    margin-top: 10px; }
 
 /*# sourceMappingURL=style.css.map */
