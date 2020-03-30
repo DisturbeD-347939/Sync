@@ -5,7 +5,7 @@ $(document).ready(function()
     $('#indexRegister').hide();
     $('#indexLogin').hide();
 
-    $('#createRoom').click(function()
+    $('.createRoom').click(function()
     {
         generateString = Math.random().toString(36).substr(2, 9);
         var url = window.location.href + "room/" + generateString;
