@@ -105,6 +105,35 @@ $(document).ready(function()
             }, 2500);
         }
     })
+
+    socket.on('login', function(data)
+    {
+        console.log(data);
+        console.log("Login was " + data["login"]);
+        if(data["login"])
+        {
+            $('#indexLogin').hide();
+            $('#indexLoggedIn').show();
+            $('#welcomeMessage').text("Welcome " + data["username"]);
+        }
+        else
+        {
+            $('#emailLogin').removeClass("valid");
+            $('#emailLogin').addClass("invalid");
+            $('#passwordLogin').removeClass("valid");
+            $('#passwordLogin').addClass("invalid");
+            $('.loginFeedback').attr("data-error", "Wrong email/password");
+            M.updateTextFields();
+
+            setTimeout(function()
+            {
+                $('#emailLogin').removeClass("invalid");
+                $('#passwordLogin').removeClass("invalid");
+                $('.loginFeedback').attr("data-error", "Wrong email type");
+            }, 2500);
+        }
+    })
+
     function update()
     {
         console.log($('#indexContent').height());
