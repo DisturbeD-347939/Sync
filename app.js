@@ -194,19 +194,19 @@ io.on('connection', function(socket)
             if(res == true)
             {
               console.log("Logged in");
-              io.to(data["email"]).emit('login', true);
+              io.to(data["email"]).emit('login', {login: true, email: data["email"], username: doc.data()["username"]});
             }
             else
             {
               console.log("Wrong email/password");
-              io.to(data["email"].emit('login', false))
+              io.to(data["email"]).emit('login', {login: false})
             }
           });
         } 
         else 
         {
             console.log("No such document!");
-            io.to(data["email"].emit('login', "error"))
+            io.to(data["email"]).emit('login', {login: false})
         }
       })
     })
