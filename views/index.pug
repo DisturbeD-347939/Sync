@@ -36,11 +36,11 @@ html
                 div.input-field.inline
                     input.validate(id="emailLogin" type="email")
                     label(for="email") Email
-                    span.helper-text(data-error="Wrong email type" data-success="Ok")
+                    span.loginFeedback.helper-text(data-error="Wrong email type" data-success="Ok")
                 div.input-field.inline
                     input.validate(id="passwordLogin" type="password")
                     label(for="password") Password
-                    span.helper-text(data-error="Wrong password type")
+                    span.loginFeedback.helper-text(data-error="Wrong password type")
                 div#submitLogin.waves-effect.waves-light.btn.grey Login
                 div.back.waves-effect.waves-light.btn.grey Back
             div#indexLoggedIn

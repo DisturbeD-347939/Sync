@@ -78,7 +78,6 @@ $(document).ready(function()
         {
             console.log("Some not valid");
         }
-        
     })
     
     socket.on('register', function(data)

@@ -7,7 +7,6 @@ if(username)
 {
     $(function()
     {
-        $('#id').html(username + " on room " + id);
 
         /**************************SOCKET CONTROL*********************************/
 
