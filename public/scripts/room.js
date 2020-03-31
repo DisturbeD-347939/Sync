@@ -135,7 +135,6 @@ if(username)
             {
                 if(player.getCurrentTime())
                 {
-                    $('#duration').html(Math.trunc(player.getCurrentTime()));
                     $('#videoSlider').attr("value", player.getCurrentTime());
                     $('#sliderP').html(player.getCurrentTime());
                 }
@@ -154,15 +153,19 @@ if(username)
         {
             player = new YT.Player('ytplayer', 
             {
-              height: '360',
-              width: '640',
-              videoId: 'M7lc1UVf-VE',
-              controls: false,
-              events: 
-              {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-              }
+                height: '360',
+                width: '640',
+                videoId: 'M7lc1UVf-VE',
+                playerVars:
+                {
+                    'autoplay': 1,
+                    'controls': 0
+                },
+                events: 
+                {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
             });
         }
 
@@ -175,6 +178,7 @@ if(username)
             //$('#volumeSlider').attr("value", event.target.getVolume());
             event.target.setVolume($('#volumeSlider').attr("value"));
             $('#volumeP').html(volumeSlider.value);
+            
         }
 
         function onPlayerStateChange(event)
@@ -206,6 +210,7 @@ if(username)
         {
             console.log("Clicked");
             console.log(player.getPlayerState());
+            console.log(player.getPlayerState() == 1);
             if(player.getPlayerState() == 1)
             {
                 player.pauseVideo();

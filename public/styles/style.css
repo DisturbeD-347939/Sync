@@ -29,7 +29,16 @@
 
 #controls {
   grid-area: controls;
-  width: 50%; }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100%; }
+  #controls #play {
+    width: 10%; }
+  #controls form:first-child {
+    width: 50%;
+    background-color: red; }
 
 #chooseVideo {
   grid-area: nothing; }
@@ -62,6 +71,16 @@
 
 .disconnect {
   background: red; }
+
+#play {
+  background-image: url(../images/icons/play.png);
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  width: 50px;
+  height: 50px; }
 
 /****************************INDEX.PUG*********************************/
 #indexBody {
